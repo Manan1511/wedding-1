@@ -112,7 +112,7 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({ onScrollToTi
 
         {/* Date & Venue */}
         <p className="mb-1" style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '1.25rem', color: '#6E4B3A', fontStyle: 'italic' }}>
-          24th – 26th November 2026
+          24th to 26th November 2026
         </p>
         <p className="mb-10" style={{ fontFamily: 'Lora, serif', fontSize: '0.9rem', color: '#8B7D6B', letterSpacing: '0.04em' }}>
           {COUPLE_DATA.venueName}

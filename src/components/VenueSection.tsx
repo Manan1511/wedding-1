@@ -53,7 +53,7 @@ export const VenueSection: React.FC = () => {
           className="mb-10 text-sm leading-relaxed"
           style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B', maxWidth: '28rem', margin: '0 auto 2.5rem' }}
         >
-          All ceremonies — Mehendi, Haldi, and the Wedding day — will be held at this single, beautiful venue in Amravati.
+          All ceremonies, including Mehendi, Haldi, and the Wedding day, will be held at this single, beautiful venue in Amravati.
         </p>
 
         {/* Directions CTA */}

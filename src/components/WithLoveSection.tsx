@@ -52,7 +52,7 @@ export const WithLoveSection: React.FC = () => {
           {COPY.withLoveBody}
         </p>
 
-        {/* Heart — single tasteful SVG, no emoji */}
+        {/* Heart: single tasteful SVG, no emoji */}
         <div className="flex items-center justify-center mb-10">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
             <path

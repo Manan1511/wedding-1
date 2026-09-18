@@ -171,7 +171,7 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
 
               <div className="mt-4 pt-3 border-t border-[#C4A265]/20 space-y-1">
                 <p className="text-[10px] tracking-widest uppercase" style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B' }}>
-                  24–26 November 2026
+                  24 to 26 November 2026
                 </p>
                 <p className="text-xs italic" style={{ fontFamily: 'Lora, serif', color: '#6E4B3A' }}>
                   {COUPLE_DATA.venueName}

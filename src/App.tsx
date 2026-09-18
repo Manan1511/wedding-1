@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Share2, Check, MailOpen } from 'lucide-react';
+import { Share2, Check, MailOpen, CalendarCheck } from 'lucide-react';
 import { EnvelopeReveal }    from './components/EnvelopeReveal';
 import { PetalShowerCanvas } from './components/PetalShowerCanvas';
 import { MusicPlayer }       from './components/MusicPlayer';
@@ -26,7 +26,7 @@ const App: React.FC = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Sayali & Travis — Wedding Invitation',
+        title: 'Sayali & Travis | Wedding Invitation',
         url:   window.location.href,
       }).catch(() => null);
     } else {
@@ -49,7 +49,7 @@ const App: React.FC = () => {
         {!opened && <EnvelopeReveal onOpenInvite={() => setOpened(true)} />}
       </AnimatePresence>
 
-      {/* Sticky header — visible after invite is opened */}
+      {/* Sticky header: visible after invite is opened */}
       <AnimatePresence>
         {opened && (
           <motion.header
@@ -121,7 +121,7 @@ const App: React.FC = () => {
         )}
       </AnimatePresence>
 
-      {/* Main content — only shown after envelope is opened */}
+      {/* Main content: only shown after envelope is opened */}
       <AnimatePresence>
         {opened && (
           <motion.main
@@ -181,15 +181,36 @@ const App: React.FC = () => {
                   <span className="w-8 h-px" style={{ background: 'linear-gradient(to left, transparent, #C4A265)' }} />
                 </div>
 
-                {/* RSVP footer CTA */}
-                <div className="pt-4">
-                  <button
+                {/* Prominent RSVP footer CTA */}
+                <div className="pt-6 pb-2">
+                  <motion.button
                     onClick={() => setRsvpOpen(true)}
-                    className="text-xs tracking-widest uppercase transition-opacity hover:opacity-70"
-                    style={{ fontFamily: 'Inter, sans-serif', color: '#C4A265', textDecoration: 'underline', textUnderlineOffset: '4px' }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center justify-center gap-3 px-9 py-4 rounded-full transition-all duration-300 group shadow-lg cursor-pointer"
+                    style={{
+                      background: 'linear-gradient(135deg, #6B2737 0%, #87293F 50%, #4D1B27 100%)',
+                      color: '#FFF2C6',
+                      border: '1.5px solid rgba(229, 193, 120, 0.65)',
+                      boxShadow: '0 8px 30px rgba(107, 39, 55, 0.35), 0 2px 10px rgba(77, 27, 39, 0.2)',
+                    }}
                   >
-                    Confirm Your Attendance
-                  </button>
+                    <CalendarCheck size={18} style={{ color: '#E5C178' }} />
+                    <span
+                      style={{
+                        fontFamily: 'Cormorant Garamond, serif',
+                        fontSize: '1.15rem',
+                        fontWeight: 600,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Confirm Your Attendance
+                    </span>
+                  </motion.button>
+                  <p className="mt-3 text-[11px] tracking-wider" style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B' }}>
+                    Kindly respond by WhatsApp to help us welcome you
+                  </p>
                 </div>
               </div>
             </footer>

@@ -12,7 +12,7 @@ interface Petal {
   color: string;
 }
 
-// Muted, soft petal palette — not a confetti cannon
+// Muted, soft petal palette, not a confetti cannon
 const COLORS = ['rgba(212,165,165,', 'rgba(196,162,101,', 'rgba(156,175,136,', 'rgba(232,213,168,'];
 const PETAL_COUNT = 14;
 
