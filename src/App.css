@@ -1,0 +1,20 @@
+/* Subtle shimmer for gold text/borders */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    #C4A265 0%,
+    #E8D5A8 40%,
+    #C4A265 60%,
+    #A0824A 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+}
+

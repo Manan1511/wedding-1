@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #FDF8F0;
+    color: #2C2421;
+    font-family: 'Lora', Georgia, serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: #C4A265;
+    color: #FDF8F0;
+  }
+}
+
+/* ─── Typography helpers ───────────────────────────── */
+.font-script   { font-family: 'Pinyon Script', cursive; }
+.font-serif    { font-family: 'Cormorant Garamond', Georgia, serif; }
+.font-body     { font-family: 'Lora', Georgia, serif; }
+.font-ui       { font-family: 'Inter', system-ui, sans-serif; }
+
+/* ─── Colour helpers ───────────────────────────────── */
+.text-gold     { color: #C4A265; }
+.bg-ivory      { background-color: #FDF8F0; }
+.bg-champagne  { background-color: #F5EDE0; }
+
+/* ─── Ornamental divider ───────────────────────────── */
+.divider-gold {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #C4A265;
+}
+.divider-gold::before,
+.divider-gold::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C4A265, transparent);
+}
+
+/* ─── Ornate oval frame (like the reference image) ─── */
+.ornate-frame {
+  position: relative;
+  border-radius: 50%;
+  background: #FDF8F0;
+  box-shadow: 0 12px 50px rgba(100, 60, 40, 0.20);
+  overflow: hidden;
+}
+.ornate-frame::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C4A265 0%, #E8D5A8 30%, #A0824A 50%, #E8D5A8 70%, #C4A265 100%);
+  z-index: -1;
+}
+
+/* ─── Subtle texture overlay ───────────────────────── */
+.texture-paper {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23F5EDE0'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23EDE0CC' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+/* ─── Luxury scrollbar ─────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F5EDE0; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #C4A265, #A0824A);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: #D4B87A; }
+
+/* ─── Marquee ──────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.animate-marquee:hover { animation-play-state: paused; }
+
+/* ─── Fade-in on scroll ────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
