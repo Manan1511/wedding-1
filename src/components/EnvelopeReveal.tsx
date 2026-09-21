@@ -10,7 +10,9 @@ interface EnvelopeRevealProps {
 }
 
 export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) => {
-  const [phase, setPhase] = useState<'sealed' | 'cracking' | 'openingFlap' | 'cardRising' | 'done'>('sealed');
+  const [phase, setPhase] = useState<
+    'sealed' | 'cracking' | 'openingFlap' | 'cardRising' | 'cardDown' | 'done'
+  >('sealed');
 
   const handleBreakSeal = () => {
     if (phase !== 'sealed') return;
@@ -36,21 +38,34 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
       setPhase('openingFlap');
     }, 900);
 
-    // Step 3: Invitation card majestically glides out of envelope
+    // Step 3: Invitation card slides up out of envelope pocket
     setTimeout(() => {
       setPhase('cardRising');
     }, 2200);
 
-    // Step 4: Finish transition to website after guests have absorbed the card
+    // Step 4: Invitation card comes DOWN to center in full view, and pauses
+    setTimeout(() => {
+      setPhase('cardDown');
+    }, 3400);
+
+    // Step 5: After a generous pause, transition to full website
     setTimeout(() => {
       setPhase('done');
-      setTimeout(onOpenInvite, 1000);
-    }, 5400);
+      setTimeout(onOpenInvite, 900);
+    }, 8500);
+  };
+
+  const handleSkipToSite = () => {
+    if (phase === 'cardDown') {
+      setPhase('done');
+      setTimeout(onOpenInvite, 700);
+    }
   };
 
   const isSealBreaking = phase !== 'sealed';
-  const isFlapOpen = phase === 'openingFlap' || phase === 'cardRising' || phase === 'done';
-  const isCardRising = phase === 'cardRising' || phase === 'done';
+  const isFlapOpen = phase !== 'sealed' && phase !== 'cracking';
+  const isCardRising = phase === 'cardRising';
+  const isCardDown = phase === 'cardDown' || phase === 'done';
 
   return (
     <div
@@ -92,21 +107,29 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
             className="relative w-full max-w-[360px] sm:max-w-[420px]"
             style={{ height: '500px' }}
           >
-            {/* ================= INVITATION CARD (Sliding Up) ================= */}
+            {/* ================= INVITATION CARD (Slides Up, then comes Down and Pauses) ================= */}
             <motion.div
+              onClick={handleSkipToSite}
               animate={{
-                y: isCardRising ? -140 : 0,
-                scale: isCardRising ? 1.03 : 1,
-                zIndex: isCardRising ? 25 : 5,
+                y: isCardRising ? -80 : isCardDown ? 15 : 0,
+                scale: isCardDown ? 1.05 : isCardRising ? 1.02 : 1,
+                zIndex: isCardDown ? 40 : isCardRising ? 35 : 5,
               }}
-              transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-x-3 sm:inset-x-4 top-3 rounded-2xl p-6 text-center overflow-hidden"
+              transition={{
+                duration: isCardDown ? 1.3 : isCardRising ? 1.1 : 0.8,
+                ease: [0.25, 1, 0.35, 1],
+              }}
+              className={`absolute inset-x-3 sm:inset-x-4 top-3 rounded-2xl p-6 text-center overflow-hidden ${
+                phase === 'cardDown' ? 'cursor-pointer select-none' : ''
+              }`}
               style={{
                 height: '445px',
                 background: 'linear-gradient(155deg, #FFFFFF 0%, #FAF4EB 60%, #F5ECDD 100%)',
                 border: '1.5px solid rgba(196, 162, 101, 0.45)',
-                boxShadow: isCardRising
-                  ? '0 24px 60px rgba(80, 50, 30, 0.25), 0 0 0 1px rgba(196, 162, 101, 0.3)'
+                boxShadow: isCardDown
+                  ? '0 25px 70px rgba(70, 45, 20, 0.30), 0 0 0 1px rgba(196, 162, 101, 0.35)'
+                  : isCardRising
+                  ? '0 16px 40px rgba(80, 50, 30, 0.20)'
                   : '0 4px 15px rgba(80, 50, 30, 0.08)',
               }}
             >
@@ -190,7 +213,13 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
             </motion.div>
 
             {/* ================= ENVELOPE BACK POCKET (Contains the card) ================= */}
-            <div
+            <motion.div
+              animate={{
+                y: isCardDown ? 25 : 0,
+                opacity: isCardDown ? 0.7 : 1,
+                scale: isCardDown ? 0.96 : 1,
+              }}
+              transition={{ duration: 1.2, ease: [0.25, 1, 0.35, 1] }}
               className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none"
               style={{
                 zIndex: 10,
@@ -211,7 +240,7 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 <line x1="0" y1="480" x2="200" y2="285" stroke="#C4A265" strokeWidth="0.8" opacity="0.4" />
                 <line x1="400" y1="480" x2="200" y2="285" stroke="#C4A265" strokeWidth="0.8" opacity="0.4" />
               </svg>
-            </div>
+            </motion.div>
 
             {/* ================= TOP ENVELOPE FLAP (Folds up on opening) ================= */}
             <motion.div
@@ -292,6 +321,32 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 </motion.p>
               )}
             </div>
+
+            {/* Tap to continue prompt when card is down during pause */}
+            {phase === 'cardDown' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                className="absolute -bottom-12 inset-x-0 text-center pointer-events-auto"
+                style={{ zIndex: 45 }}
+              >
+                <button
+                  onClick={handleSkipToSite}
+                  className="inline-flex items-center gap-2 px-6 py-2 rounded-full text-xs uppercase tracking-widest cursor-pointer transition-all hover:scale-105 active:scale-95"
+                  style={{
+                    background: 'linear-gradient(135deg, #6B2737, #4D1B27)',
+                    color: '#FFF2C6',
+                    border: '1.5px solid rgba(229, 193, 120, 0.65)',
+                    boxShadow: '0 4px 18px rgba(107, 39, 55, 0.3)',
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  <span>Enter Wedding Website</span>
+                  <span>↓</span>
+                </button>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
