@@ -2,7 +2,7 @@ import type { WeddingEvent, CoupleDetails } from '../types';
 
 export const VENUE_NAME    = 'Enrise by Sayaji, Amravati';
 export const VENUE_ADDRESS = 'Badnera Road, near Rajapeth, Amravati, Maharashtra 444601';
-export const VENUE_MAPS_URL = 'https://share.google/dM2RlIvhrObGEzrDY';
+export const VENUE_MAPS_URL = 'https://maps.app.goo.gl/7qAekfVEArnXt6XR6';
 export const HOST_PHONE    = '918805775117';
 export const DISPLAY_PHONE = '+91 88057 75117';
 
