@@ -197,6 +197,6 @@ export const playWaxSealOpeningSequence = (): void => {
 
   const now = ctx.currentTime;
   playWaxCrack(ctx, now);
-  playPaperSlide(ctx, now + 0.38);
-  playHarmonicChime(ctx, now + 0.42);
+  playPaperSlide(ctx, now + 0.85);
+  playHarmonicChime(ctx, now + 1.9);
 };

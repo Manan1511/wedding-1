@@ -31,21 +31,21 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
       gravity: 0.7,
     });
 
-    // Step 2: Flap unfolds upward
+    // Step 2: Flap unfolds upward slowly and gracefully
     setTimeout(() => {
       setPhase('openingFlap');
-    }, 450);
-
-    // Step 3: Invitation card glides out of envelope
-    setTimeout(() => {
-      setPhase('cardRising');
     }, 900);
 
-    // Step 4: Finish transition to website
+    // Step 3: Invitation card majestically glides out of envelope
+    setTimeout(() => {
+      setPhase('cardRising');
+    }, 2200);
+
+    // Step 4: Finish transition to website after guests have absorbed the card
     setTimeout(() => {
       setPhase('done');
-      setTimeout(onOpenInvite, 700);
-    }, 1900);
+      setTimeout(onOpenInvite, 1000);
+    }, 5400);
   };
 
   const isSealBreaking = phase !== 'sealed';
@@ -88,7 +88,7 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
             initial={{ opacity: 0, y: 35, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -70, scale: 0.95 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1.1, ease: [0.25, 1, 0.5, 1] }}
             className="relative w-full max-w-[360px] sm:max-w-[420px]"
             style={{ height: '500px' }}
           >
@@ -99,7 +99,7 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 scale: isCardRising ? 1.03 : 1,
                 zIndex: isCardRising ? 25 : 5,
               }}
-              transition={{ duration: 0.9, ease: [0.33, 1, 0.68, 1] }}
+              transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
               className="absolute inset-x-3 sm:inset-x-4 top-3 rounded-2xl p-6 text-center overflow-hidden"
               style={{
                 height: '445px',
@@ -225,8 +225,8 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 rotateX: isFlapOpen ? 180 : 0,
               }}
               transition={{
-                duration: 0.85,
-                ease: [0.4, 0, 0.2, 1],
+                duration: 1.3,
+                ease: [0.33, 1, 0.68, 1],
               }}
             >
               <svg viewBox="0 0 400 240" className="w-full h-full filter drop-shadow-[0_6px_10px_rgba(90,60,35,0.18)]">

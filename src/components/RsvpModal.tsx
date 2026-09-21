@@ -33,8 +33,12 @@ export const RsvpModal: React.FC<RsvpSectionProps> = ({ isOpen, onClose }) => {
   const handleSubmit = (evt: React.FormEvent) => {
     evt.preventDefault();
     if (!form.guestName.trim()) return;
+    const finalForm = {
+      ...form,
+      numberOfGuests: Math.max(1, form.numberOfGuests || 1),
+    };
     confetti({ particleCount: 50, spread: 60, origin: { y: 0.65 }, colors: ['#C4A265', '#D4A5A5', '#9CAF88'] });
-    window.open(generateWhatsAppRsvpUrl(form), '_blank', 'noopener,noreferrer');
+    window.open(generateWhatsAppRsvpUrl(finalForm), '_blank', 'noopener,noreferrer');
     onClose();
   };
 
@@ -104,27 +108,80 @@ export const RsvpModal: React.FC<RsvpSectionProps> = ({ isOpen, onClose }) => {
 
                 {/* Guest count */}
                 <div>
-                  <label className="block text-xs tracking-widest uppercase mb-2" style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B' }}>
-                    Party Size
-                  </label>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4, '5+'].map((n) => (
-                      <button
-                        key={n}
-                        type="button"
-                        onClick={() => setForm({ ...form, numberOfGuests: typeof n === 'number' ? n : 5 })}
-                        className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-all"
-                        style={{
-                          fontFamily: 'Inter, sans-serif',
-                          background: form.numberOfGuests === (typeof n === 'number' ? n : 5)
-                            ? 'linear-gradient(135deg, #C4A265, #A0824A)' : '#FDFAF5',
-                          color: form.numberOfGuests === (typeof n === 'number' ? n : 5) ? '#FDF8F0' : '#8B7D6B',
-                          border: '1px solid rgba(196,162,101,0.3)',
-                        }}
-                      >
-                        {n}
-                      </button>
-                    ))}
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-xs tracking-widest uppercase" style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B' }}>
+                      Number of Guests
+                    </label>
+                    <span className="text-[11px] text-[#8B7D6B]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                      {form.numberOfGuests === 1 ? '1 guest' : `${form.numberOfGuests || 1} guests`}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setForm((prev) => ({ ...prev, numberOfGuests: Math.max(1, (prev.numberOfGuests || 1) - 1) }))}
+                      className="w-12 h-11 rounded-xl flex items-center justify-center transition-all cursor-pointer hover:bg-[#F5EDE0] active:scale-95 select-none"
+                      style={{
+                        background: '#FDFAF5',
+                        border: '1px solid rgba(196,162,101,0.3)',
+                        color: '#6E4B3A',
+                        fontFamily: 'Inter, sans-serif',
+                        fontSize: '1.25rem',
+                        lineHeight: 1,
+                      }}
+                      aria-label="Decrease guest count"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      min="1"
+                      max="99"
+                      required
+                      placeholder="e.g. 2"
+                      value={form.numberOfGuests || ''}
+                      onChange={(e) => {
+                        const raw = e.target.value;
+                        if (raw === '') {
+                          setForm((prev) => ({ ...prev, numberOfGuests: 0 }));
+                        } else {
+                          const val = parseInt(raw, 10);
+                          if (!isNaN(val)) {
+                            setForm((prev) => ({ ...prev, numberOfGuests: Math.max(1, val) }));
+                          }
+                        }
+                      }}
+                      onBlur={() => {
+                        if (!form.numberOfGuests || form.numberOfGuests < 1) {
+                          setForm((prev) => ({ ...prev, numberOfGuests: 1 }));
+                        }
+                      }}
+                      className="flex-1 px-4 py-2.5 text-center rounded-xl outline-none transition-shadow focus:shadow-[0_0_0_2px_rgba(196,162,101,0.4)]"
+                      style={{
+                        fontFamily: 'Lora, serif',
+                        fontSize: '1.05rem',
+                        fontWeight: 500,
+                        color: '#2C2421',
+                        background: '#FDFAF5',
+                        border: '1px solid rgba(196,162,101,0.3)',
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setForm((prev) => ({ ...prev, numberOfGuests: (prev.numberOfGuests || 0) + 1 }))}
+                      className="w-12 h-11 rounded-xl flex items-center justify-center transition-all cursor-pointer hover:bg-[#F5EDE0] active:scale-95 select-none"
+                      style={{
+                        background: '#FDFAF5',
+                        border: '1px solid rgba(196,162,101,0.3)',
+                        color: '#6E4B3A',
+                        fontFamily: 'Inter, sans-serif',
+                        fontSize: '1.25rem',
+                        lineHeight: 1,
+                      }}
+                      aria-label="Increase guest count"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
 

@@ -103,11 +103,11 @@ export const WaxSeal: React.FC<WaxSealProps> = ({ isOpening, onClick, size = 115
           animate={
             isOpening
               ? {
-                  x: -32,
-                  y: 10,
+                  x: -36,
+                  y: 12,
                   rotate: -14,
                   opacity: 0,
-                  transition: { duration: 0.65, ease: [0.4, 0, 0.2, 1] },
+                  transition: { duration: 1.2, ease: [0.3, 0, 0.2, 1] },
                 }
               : { x: 0, y: 0, rotate: 0, opacity: 1 }
           }
@@ -122,11 +122,11 @@ export const WaxSeal: React.FC<WaxSealProps> = ({ isOpening, onClick, size = 115
           animate={
             isOpening
               ? {
-                  x: 32,
-                  y: 14,
+                  x: 36,
+                  y: 16,
                   rotate: 15,
                   opacity: 0,
-                  transition: { duration: 0.65, ease: [0.4, 0, 0.2, 1] },
+                  transition: { duration: 1.2, ease: [0.3, 0, 0.2, 1] },
                 }
               : { x: 0, y: 0, rotate: 0, opacity: 1 }
           }
@@ -146,7 +146,7 @@ export const WaxSeal: React.FC<WaxSealProps> = ({ isOpening, onClick, size = 115
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: 1, opacity: [0, 1, 0.9, 0] }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            transition={{ duration: 0.9, ease: 'easeOut' }}
             filter="drop-shadow(0 0 8px #FFD700)"
           />
         )}
