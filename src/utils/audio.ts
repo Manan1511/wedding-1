@@ -1,8 +1,8 @@
 // Audio utilities: Tactile wax snap, paper slide swoosh, resonant chime cascade, and background instrumental
 let backgroundAudioInstance: HTMLAudioElement | null = null;
 
-const BACKGROUND_MUSIC_URL = 'https://cdn.pixabay.com/download/audio/2023/04/04/audio_b8d9eba1c6.mp3';
-const DEFAULT_MUSIC_VOLUME = 0.35;
+const BACKGROUND_MUSIC_URL = '/audio/wedding-music.mp3';
+const DEFAULT_MUSIC_VOLUME = 0.45;
 const CHIME_VOLUME = 0.08;
 const CRACK_VOLUME = 0.25;
 const PAPER_VOLUME = 0.06;

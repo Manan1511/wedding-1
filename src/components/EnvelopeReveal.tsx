@@ -15,9 +15,10 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
   const handleBreakSeal = () => {
     if (phase !== 'sealed') return;
 
-    // Step 1: Crack the seal with tactile fracture sound and harmonic chime
+    // Step 1: Crack the seal with tactile fracture sound and start music
     setPhase('cracking');
     playWaxSealOpeningSequence();
+    startBackgroundMusic();
 
     // Subtle golden & rose petal confetti
     confetti({
@@ -38,7 +39,6 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
     // Step 3: Invitation card glides out of envelope
     setTimeout(() => {
       setPhase('cardRising');
-      startBackgroundMusic();
     }, 900);
 
     // Step 4: Finish transition to website
