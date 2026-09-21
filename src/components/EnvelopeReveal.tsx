@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { COUPLE_DATA, COPY } from '../constants/weddingData';
 import { WaxSeal } from './WaxSeal';
 import { playWaxSealOpeningSequence, startBackgroundMusic } from '../utils/audio';
+
+// Named constants for choreography timing
+const AUTO_OPEN_SEAL_DELAY_MS = 5000;
+const FLAP_OPEN_DELAY_MS = 900;
+const CARD_RISE_DELAY_MS = 2100;
+const CARD_SETTLE_DELAY_MS = 3300;
+const AUTO_ENTER_SITE_DELAY_MS = 7500;
+const AUTO_TRANSITION_FINISH_DELAY_MS = 600;
+const SKIP_TRANSITION_DELAY_MS = 350;
+const CONFETTI_PARTICLE_COUNT = 45;
+const CONFETTI_SPREAD = 60;
 
 interface EnvelopeRevealProps {
   onOpenInvite: () => void;
@@ -14,8 +25,22 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
     'sealed' | 'cracking' | 'openingFlap' | 'cardRising' | 'cardDown' | 'done'
   >('sealed');
 
-  const handleBreakSeal = () => {
+  const timersRef = useRef<number[]>([]);
+
+  const clearAllTimers = useCallback(() => {
+    timersRef.current.forEach((id) => window.clearTimeout(id));
+    timersRef.current = [];
+  }, []);
+
+  const addTimer = useCallback((fn: () => void, delay: number) => {
+    const id = window.setTimeout(fn, delay);
+    timersRef.current.push(id);
+    return id;
+  }, []);
+
+  const handleBreakSeal = useCallback(() => {
     if (phase !== 'sealed') return;
+    clearAllTimers();
 
     // Step 1: Crack the seal with tactile fracture sound and start music
     setPhase('cracking');
@@ -24,8 +49,8 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
 
     // Subtle golden & rose petal confetti
     confetti({
-      particleCount: 45,
-      spread: 60,
+      particleCount: CONFETTI_PARTICLE_COUNT,
+      spread: CONFETTI_SPREAD,
       origin: { y: 0.6 },
       colors: ['#C4A265', '#D4A5A5', '#E8D5A8', '#9CAF88', '#F5EDE0'],
       shapes: ['circle'],
@@ -34,33 +59,53 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
     });
 
     // Step 2: Flap unfolds upward slowly and gracefully
-    setTimeout(() => {
+    addTimer(() => {
       setPhase('openingFlap');
-    }, 900);
+    }, FLAP_OPEN_DELAY_MS);
 
     // Step 3: Invitation card slides up out of envelope pocket
-    setTimeout(() => {
+    addTimer(() => {
       setPhase('cardRising');
-    }, 2200);
+    }, CARD_RISE_DELAY_MS);
 
     // Step 4: Invitation card comes DOWN to center in full view, and pauses
-    setTimeout(() => {
+    addTimer(() => {
       setPhase('cardDown');
-    }, 3400);
+    }, CARD_SETTLE_DELAY_MS);
 
-    // Step 5: After a generous pause, transition to full website
-    setTimeout(() => {
+    // Step 5: Automatically enter the website after a comfortable reading pause
+    addTimer(() => {
       setPhase('done');
-      setTimeout(onOpenInvite, 900);
-    }, 8500);
-  };
+      addTimer(() => {
+        onOpenInvite();
+      }, AUTO_TRANSITION_FINISH_DELAY_MS);
+    }, AUTO_ENTER_SITE_DELAY_MS);
+  }, [phase, clearAllTimers, addTimer, onOpenInvite]);
 
-  const handleSkipToSite = () => {
-    if (phase === 'cardDown') {
-      setPhase('done');
-      setTimeout(onOpenInvite, 700);
-    }
-  };
+  const handleSkipToSite = useCallback(() => {
+    if (phase === 'done') return;
+    clearAllTimers();
+    setPhase('done');
+    addTimer(() => {
+      onOpenInvite();
+    }, SKIP_TRANSITION_DELAY_MS);
+  }, [phase, clearAllTimers, addTimer, onOpenInvite]);
+
+  const handleBreakSealRef = useRef(handleBreakSeal);
+  useEffect(() => {
+    handleBreakSealRef.current = handleBreakSeal;
+  });
+
+  useEffect(() => {
+    // If the visitor is idle on the sealed envelope, automatically begin reveal
+    addTimer(() => {
+      handleBreakSealRef.current();
+    }, AUTO_OPEN_SEAL_DELAY_MS);
+
+    return () => {
+      clearAllTimers();
+    };
+  }, [addTimer, clearAllTimers]);
 
   const isSealBreaking = phase !== 'sealed';
   const isFlapOpen = phase !== 'sealed' && phase !== 'cracking';
@@ -68,7 +113,10 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
   const isCardDown = phase === 'cardDown' || phase === 'done';
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: 'easeInOut' }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-hidden"
       style={{
         background: 'linear-gradient(160deg, #FDF8F0 0%, #F5EDE0 50%, #EDE0CC 100%)',
@@ -322,34 +370,35 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
               )}
             </div>
 
-            {/* Tap to continue prompt when card is down during pause */}
+            {/* Auto-enter indicator & instant skip option when card is down */}
             {phase === 'cardDown' && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6 }}
-                className="absolute -bottom-12 inset-x-0 text-center pointer-events-auto"
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="absolute -bottom-12 inset-x-0 text-center pointer-events-auto flex flex-col items-center gap-1"
                 style={{ zIndex: 45 }}
               >
                 <button
+                  type="button"
                   onClick={handleSkipToSite}
-                  className="inline-flex items-center gap-2 px-6 py-2 rounded-full text-xs uppercase tracking-widest cursor-pointer transition-all hover:scale-105 active:scale-95"
+                  className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full text-[11px] uppercase tracking-widest cursor-pointer transition-all hover:opacity-90 active:scale-95"
                   style={{
                     background: 'linear-gradient(135deg, #6B2737, #4D1B27)',
                     color: '#FFF2C6',
-                    border: '1.5px solid rgba(229, 193, 120, 0.65)',
-                    boxShadow: '0 4px 18px rgba(107, 39, 55, 0.3)',
+                    border: '1px solid rgba(229, 193, 120, 0.65)',
+                    boxShadow: '0 4px 16px rgba(107, 39, 55, 0.28)',
                     fontFamily: 'Inter, sans-serif',
                   }}
                 >
-                  <span>Enter Wedding Website</span>
-                  <span>↓</span>
+                  <span>Entering website...</span>
+                  <span className="text-[10px] text-[#E5C178] font-bold">Skip &rarr;</span>
                 </button>
               </motion.div>
             )}
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
