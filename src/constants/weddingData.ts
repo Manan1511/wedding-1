@@ -3,18 +3,22 @@ import type { WeddingEvent, CoupleDetails } from '../types';
 export const VENUE_NAME    = 'Enrise by Sayaji, Amravati';
 export const VENUE_ADDRESS = 'Badnera Road, near Rajapeth, Amravati, Maharashtra 444601';
 export const VENUE_MAPS_URL = 'https://share.google/dM2RlIvhrObGEzrDY';
-export const HOST_PHONE    = '919999999999'; // TODO: Replace with actual WhatsApp number
+export const HOST_PHONE    = '918805775117';
+export const DISPLAY_PHONE = '+91 88057 75117';
 
 export const COUPLE_DATA: CoupleDetails = {
   groomName:    'Travis Hale',
   groomTitle:   'Groom',
+  groomParents: 'Late Mr. Tyrone Duddley Hale and Late Mrs. Janet Tyrone Hale',
   brideName:    'Sayali Dharpal',
   brideTitle:   'Bride',
+  brideParents: 'Mr. Narendra Devidasrao Dharpal and Mrs. Meena Narendra Dharpal',
   weddingDate:  '26th November 2026',
   venueName:    VENUE_NAME,
   venueAddress: VENUE_ADDRESS,
   mapsUrl:      VENUE_MAPS_URL,
   hostPhone:    HOST_PHONE,
+  displayPhone: DISPLAY_PHONE,
 };
 
 export const COPY = {

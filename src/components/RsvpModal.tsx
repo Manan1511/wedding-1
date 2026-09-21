@@ -4,6 +4,7 @@ import { X, Send } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { RSVPFormData } from '../types';
 import { generateWhatsAppRsvpUrl } from '../utils/whatsapp';
+import { DISPLAY_PHONE } from '../constants/weddingData';
 
 interface RsvpSectionProps {
   isOpen: boolean;
@@ -190,7 +191,7 @@ export const RsvpModal: React.FC<RsvpSectionProps> = ({ isOpen, onClose }) => {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-full flex items-center justify-center gap-2 transition-opacity hover:opacity-85 mt-2"
+                  className="w-full py-3.5 rounded-full flex items-center justify-center gap-2 transition-opacity hover:opacity-85 mt-2 cursor-pointer"
                   style={{
                     background: 'linear-gradient(135deg, #6B2737, #4D1B27)',
                     color: '#E8D5A8',
@@ -204,6 +205,9 @@ export const RsvpModal: React.FC<RsvpSectionProps> = ({ isOpen, onClose }) => {
                   <Send size={15} />
                   Send via WhatsApp
                 </button>
+                <p className="text-center text-[11px] text-[#8B7D6B] mt-3" style={{ fontFamily: 'Inter, sans-serif' }}>
+                  RSVP: {DISPLAY_PHONE}
+                </p>
               </form>
             </div>
           </motion.div>

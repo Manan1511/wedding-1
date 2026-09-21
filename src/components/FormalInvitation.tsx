@@ -71,7 +71,7 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({ onScrollToTi
         {/* Bride name */}
         <h1 style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(3rem, 10vw, 5.5rem)',
+          fontSize: 'clamp(2.8rem, 8vw, 5rem)',
           fontWeight: 600,
           color: '#2C2421',
           lineHeight: 1,
@@ -79,6 +79,13 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({ onScrollToTi
         }}>
           {COUPLE_DATA.brideName}
         </h1>
+        <p
+          className="mt-2 text-xs sm:text-sm tracking-wide text-[#8B7D6B]"
+          style={{ fontFamily: 'Lora, serif' }}
+        >
+          <span className="italic">Daughter of </span>
+          {COUPLE_DATA.brideParents}
+        </p>
 
         {/* Script & */}
         <div className="my-6 flex items-center justify-center gap-4">
@@ -92,7 +99,7 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({ onScrollToTi
         {/* Groom name */}
         <h1 style={{
           fontFamily: 'Cormorant Garamond, serif',
-          fontSize: 'clamp(3rem, 10vw, 5.5rem)',
+          fontSize: 'clamp(2.8rem, 8vw, 5rem)',
           fontWeight: 600,
           color: '#2C2421',
           lineHeight: 1,
@@ -100,6 +107,13 @@ export const FormalInvitation: React.FC<FormalInvitationProps> = ({ onScrollToTi
         }}>
           {COUPLE_DATA.groomName}
         </h1>
+        <p
+          className="mt-2 text-xs sm:text-sm tracking-wide text-[#8B7D6B]"
+          style={{ fontFamily: 'Lora, serif' }}
+        >
+          <span className="italic">Son of </span>
+          {COUPLE_DATA.groomParents}
+        </p>
 
         {/* Divider */}
         <div className="flex items-center gap-4 my-10">

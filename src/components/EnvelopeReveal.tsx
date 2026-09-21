@@ -90,7 +90,7 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
             exit={{ opacity: 0, y: -70, scale: 0.95 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative w-full max-w-[360px] sm:max-w-[420px]"
-            style={{ height: '480px' }}
+            style={{ height: '500px' }}
           >
             {/* ================= INVITATION CARD (Sliding Up) ================= */}
             <motion.div
@@ -100,9 +100,9 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 zIndex: isCardRising ? 25 : 5,
               }}
               transition={{ duration: 0.9, ease: [0.33, 1, 0.68, 1] }}
-              className="absolute inset-x-3 sm:inset-x-4 top-4 rounded-2xl p-7 text-center overflow-hidden"
+              className="absolute inset-x-3 sm:inset-x-4 top-3 rounded-2xl p-6 text-center overflow-hidden"
               style={{
-                height: '420px',
+                height: '445px',
                 background: 'linear-gradient(155deg, #FFFFFF 0%, #FAF4EB 60%, #F5ECDD 100%)',
                 border: '1.5px solid rgba(196, 162, 101, 0.45)',
                 boxShadow: isCardRising
@@ -128,22 +128,22 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 </div>
               ))}
 
-              <p className="text-[11px] tracking-[0.25em] uppercase mb-3" style={{ color: '#C4A265', fontFamily: 'Inter, sans-serif' }}>
+              <p className="text-[11px] tracking-[0.25em] uppercase mb-2" style={{ color: '#C4A265', fontFamily: 'Inter, sans-serif' }}>
                 {COPY.ganesh}
               </p>
 
               <p className="text-xs leading-relaxed" style={{ fontFamily: 'Lora, serif', color: '#8B7D6B' }}>
                 {COPY.families}
               </p>
-              <p className="text-[11px] italic mb-4" style={{ fontFamily: 'Lora, serif', color: '#8B7D6B' }}>
+              <p className="text-[11px] italic mb-3" style={{ fontFamily: 'Lora, serif', color: '#8B7D6B' }}>
                 {COPY.formalLine}
               </p>
 
-              <div className="my-3">
+              <div className="my-2">
                 <h2
                   style={{
                     fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: '2.1rem',
+                    fontSize: '1.85rem',
                     fontWeight: 600,
                     color: '#2C2421',
                     lineHeight: 1,
@@ -151,15 +151,21 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 >
                   {COUPLE_DATA.brideName}
                 </h2>
+                <p className="text-[10.5px] text-[#8B7D6B] mt-1 leading-snug" style={{ fontFamily: 'Lora, serif' }}>
+                  <span className="italic">Daughter of </span>
+                  {COUPLE_DATA.brideParents}
+                </p>
+
                 <div className="flex items-center justify-center gap-3 my-1.5">
                   <span className="w-8 h-px" style={{ background: 'linear-gradient(to right, transparent, #C4A265)' }} />
-                  <span style={{ fontFamily: 'Pinyon Script, cursive', fontSize: '1.6rem', color: '#C4A265', lineHeight: 1 }}>&amp;</span>
+                  <span style={{ fontFamily: 'Pinyon Script, cursive', fontSize: '1.4rem', color: '#C4A265', lineHeight: 1 }}>&amp;</span>
                   <span className="w-8 h-px" style={{ background: 'linear-gradient(to left, transparent, #C4A265)' }} />
                 </div>
+
                 <h2
                   style={{
                     fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: '2.1rem',
+                    fontSize: '1.85rem',
                     fontWeight: 600,
                     color: '#2C2421',
                     lineHeight: 1,
@@ -167,9 +173,13 @@ export const EnvelopeReveal: React.FC<EnvelopeRevealProps> = ({ onOpenInvite }) 
                 >
                   {COUPLE_DATA.groomName}
                 </h2>
+                <p className="text-[10.5px] text-[#8B7D6B] mt-1 leading-snug" style={{ fontFamily: 'Lora, serif' }}>
+                  <span className="italic">Son of </span>
+                  {COUPLE_DATA.groomParents}
+                </p>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-[#C4A265]/20 space-y-1">
+              <div className="mt-3 pt-2.5 border-t border-[#C4A265]/20 space-y-1">
                 <p className="text-[10px] tracking-widest uppercase" style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B' }}>
                   24 to 26 November 2026
                 </p>

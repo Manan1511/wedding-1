@@ -15,13 +15,16 @@ export interface WeddingEvent {
 export interface CoupleDetails {
   groomName: string;
   groomTitle: string;
+  groomParents: string;
   brideName: string;
   brideTitle: string;
+  brideParents: string;
   weddingDate: string;
   venueName: string;
   venueAddress: string;
   mapsUrl: string;
   hostPhone: string;
+  displayPhone: string;
 }
 
 export interface CountdownTimeLeft {
