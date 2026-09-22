@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 import type { WeddingEvent } from '../types';
 import { WEDDING_EVENTS } from '../constants/weddingData';
 import { getGoogleCalendarUrl } from '../utils/calendar';
@@ -95,14 +96,43 @@ const CeremonyCard: React.FC<{ event: WeddingEvent; index: number }> = ({ event,
           "{event.description}"
         </p>
 
-        {/* Attire */}
-        <p
-          className="mb-5 text-sm"
-          style={{ fontFamily: 'Inter, sans-serif', color: '#8B7D6B' }}
+        {/* Attire Callout */}
+        <div
+          className={`flex ${
+            imageSrc ? (isEven ? 'lg:justify-start' : 'lg:justify-end') : 'justify-center'
+          } justify-center mb-5`}
         >
-          <span style={{ color: '#C4A265' }}>Attire: </span>
-          {event.attire}
-        </p>
+          <div
+            className="inline-flex items-center flex-wrap gap-2 sm:gap-2.5 px-3.5 sm:px-4 py-2 rounded-2xl sm:rounded-full transition-all hover:border-[#C4A265]/70"
+            style={{
+              background: 'linear-gradient(135deg, #FAF4EB 0%, #F5ECDD 100%)',
+              border: '1px solid rgba(196, 162, 101, 0.45)',
+              boxShadow: '0 2px 10px rgba(100, 60, 40, 0.05)',
+            }}
+          >
+            <div
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full flex-shrink-0"
+              style={{
+                background: 'rgba(196, 162, 101, 0.16)',
+                border: '1px solid rgba(196, 162, 101, 0.3)',
+              }}
+            >
+              <Sparkles size={12} style={{ color: '#8B6834' }} />
+              <span
+                className="text-[10px] font-semibold uppercase tracking-[0.15em]"
+                style={{ fontFamily: 'Inter, sans-serif', color: '#8B6834' }}
+              >
+                Attire
+              </span>
+            </div>
+            <span
+              className="text-xs sm:text-[13px] leading-snug font-medium"
+              style={{ fontFamily: 'Lora, serif', color: '#3E2A1E', fontStyle: 'italic' }}
+            >
+              {event.attire}
+            </span>
+          </div>
+        </div>
 
         {/* Calendar links */}
         <div className={`flex items-center gap-4 flex-wrap ${imageSrc ? (isEven ? 'justify-start' : 'justify-end') : 'justify-center'}`}>
