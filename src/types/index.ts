@@ -1,3 +1,8 @@
+export interface AttireColor {
+  name: string;
+  hex: string;
+}
+
 export interface WeddingEvent {
   id: string;
   title: string;
@@ -8,6 +13,7 @@ export interface WeddingEvent {
   description: string;
   marathiDescription: string;
   attire: string;
+  attireColors?: AttireColor[];
   venueName: string;
   iconName: 'mehendi' | 'haldi' | 'baraat' | 'varmala' | 'pheras' | 'bidai';
 }

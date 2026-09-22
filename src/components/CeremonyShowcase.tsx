@@ -96,7 +96,7 @@ const CeremonyCard: React.FC<{ event: WeddingEvent; index: number }> = ({ event,
           "{event.description}"
         </p>
 
-        {/* Attire Callout */}
+        {/* Attire Callout with Color Swatches */}
         <div
           className={`flex ${
             imageSrc ? (isEven ? 'lg:justify-start' : 'lg:justify-end') : 'justify-center'
@@ -119,7 +119,7 @@ const CeremonyCard: React.FC<{ event: WeddingEvent; index: number }> = ({ event,
             >
               <Sparkles size={12} style={{ color: '#8B6834' }} />
               <span
-                className="text-[10px] font-semibold uppercase tracking-[0.15em]"
+                className="text-[10px] font-semibold uppercase tracking-[0.14em]"
                 style={{ fontFamily: 'Inter, sans-serif', color: '#8B6834' }}
               >
                 Attire
@@ -131,6 +131,24 @@ const CeremonyCard: React.FC<{ event: WeddingEvent; index: number }> = ({ event,
             >
               {event.attire}
             </span>
+
+            {/* Small Color Boxes */}
+            {event.attireColors && event.attireColors.length > 0 && (
+              <div className="flex items-center gap-1.5 pl-1.5 border-l border-[#C4A265]/35 py-0.5">
+                {event.attireColors.map((color) => (
+                  <span
+                    key={color.name}
+                    title={color.name}
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-[3px] transition-transform hover:scale-125 cursor-help"
+                    style={{
+                      backgroundColor: color.hex,
+                      border: '1px solid rgba(196, 162, 101, 0.55)',
+                      boxShadow: '0 1px 3px rgba(60, 35, 20, 0.2)',
+                    }}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
