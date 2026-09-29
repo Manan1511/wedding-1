@@ -7,6 +7,7 @@ import { MusicPlayer }       from './components/MusicPlayer';
 import { FormalInvitation }  from './components/FormalInvitation';
 import { WithLoveSection }   from './components/WithLoveSection';
 import { CountdownTimer }    from './components/CountdownTimer';
+import { ItinerarySection }  from './components/ItinerarySection';
 import { MarqueeBanner }     from './components/MarqueeBanner';
 import { CeremonyShowcase }  from './components/CeremonyShowcase';
 import { VenueSection }      from './components/VenueSection';
@@ -141,10 +142,13 @@ const App: React.FC = () => {
             {/* Section 4: Countdown */}
             <CountdownTimer />
 
-            {/* Section 5: Ceremony showcase with watercolor illustrations */}
+            {/* Section 5: Downloadable wedding itinerary */}
+            <ItinerarySection />
+
+            {/* Section 6: Ceremony showcase with watercolor illustrations */}
             <CeremonyShowcase />
 
-            {/* Section 6: Venue */}
+            {/* Section 7: Venue */}
             <VenueSection />
 
             {/* Footer */}

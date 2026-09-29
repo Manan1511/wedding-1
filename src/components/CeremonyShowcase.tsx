@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { MapPin, Sparkles } from 'lucide-react';
 import type { WeddingEvent } from '../types';
 import { WEDDING_EVENTS } from '../constants/weddingData';
 import { getGoogleCalendarUrl } from '../utils/calendar';
@@ -87,6 +87,14 @@ const CeremonyCard: React.FC<{ event: WeddingEvent; index: number }> = ({ event,
           style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.78rem', color: '#C4A265', letterSpacing: '0.12em', textTransform: 'uppercase' }}
         >
           {event.date} &nbsp;&bull;&nbsp; {event.time}
+        </p>
+
+        <p
+          className="mb-4 inline-flex items-center gap-1.5"
+          style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.72rem', color: '#8B7D6B', letterSpacing: '0.06em' }}
+        >
+          <MapPin size={12} style={{ color: '#C4A265' }} />
+          {event.venueName}
         </p>
 
         {/* Description */}
