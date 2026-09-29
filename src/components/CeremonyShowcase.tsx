@@ -8,6 +8,7 @@ import { getGoogleCalendarUrl } from '../utils/calendar';
 const CEREMONY_IMAGES: Partial<Record<string, string>> = {
   mehendi: '/images/mehendi.jpg',
   haldi:   '/images/haldi.jpg',
+  engagement: '/images/engagement.png',
   varmala: '/images/varmala.jpg',
   pheras:  '/images/pheras.jpg',
 };

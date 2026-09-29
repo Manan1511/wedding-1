@@ -15,7 +15,7 @@ export interface WeddingEvent {
   attire: string;
   attireColors?: AttireColor[];
   venueName: string;
-  iconName: 'mehendi' | 'haldi' | 'baraat' | 'varmala' | 'pheras' | 'bidai';
+  iconName: 'mehendi' | 'haldi' | 'engagement' | 'baraat' | 'varmala' | 'pheras' | 'bidai';
 }
 
 export interface CoupleDetails {
