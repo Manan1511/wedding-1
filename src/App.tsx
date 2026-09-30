@@ -142,14 +142,14 @@ const App: React.FC = () => {
             {/* Section 4: Countdown */}
             <CountdownTimer />
 
-            {/* Section 5: Downloadable wedding itinerary */}
-            <ItinerarySection />
-
-            {/* Section 6: Ceremony showcase with watercolor illustrations */}
+            {/* Section 5: Ceremony showcase with watercolor illustrations */}
             <CeremonyShowcase />
 
-            {/* Section 7: Venue */}
+            {/* Section 6: Venue and directions */}
             <VenueSection />
+
+            {/* Section 7: Downloadable wedding itinerary */}
+            <ItinerarySection />
 
             {/* Footer */}
             <footer
