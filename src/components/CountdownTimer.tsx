@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { CountdownTimeLeft } from '../types';
 
-const TARGET = '2026-11-26T09:30:00+05:30';
+const TARGET = '2026-11-26T10:30:00+05:30';
 
 const calc = (target: string): CountdownTimeLeft => {
   const diff = +new Date(target) - +new Date();

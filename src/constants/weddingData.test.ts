@@ -26,7 +26,7 @@ describe('wedding schedule', () => {
         { id: 'haldi', time: '9:00 AM onwards', timestamp: '2026-11-25T09:00:00+05:30' },
         { id: 'engagement', time: '4:00 PM onwards', timestamp: '2026-11-25T16:00:00+05:30' },
         { id: 'baraat', time: '8:00 AM sharp', timestamp: '2026-11-26T08:00:00+05:30' },
-        { id: 'varmala', time: '9:30 AM sharp', timestamp: '2026-11-26T09:30:00+05:30' },
+        { id: 'varmala', time: '10:30 AM sharp', timestamp: '2026-11-26T10:30:00+05:30' },
         { id: 'pheras', time: '1:30 PM sharp', timestamp: '2026-11-26T13:30:00+05:30' },
         { id: 'bidai', time: '4:30 PM', timestamp: '2026-11-26T16:30:00+05:30' },
       ],
