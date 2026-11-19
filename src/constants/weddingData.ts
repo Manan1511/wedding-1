@@ -1,8 +1,8 @@
 import type { WeddingEvent, CoupleDetails } from '../types';
 
 export const VENUE_NAME    = 'Enrise by Sayaji, Amravati';
-export const VENUE_ADDRESS = 'Badnera Road, near Rajapeth, Amravati, Maharashtra 444601';
-export const VENUE_MAPS_URL = 'https://maps.app.goo.gl/7qAekfVEArnXt6XR6';
+export const VENUE_ADDRESS = 'NH-6, Nagpur Highway Road, Borgaon (Dharmale), Amravati, Maharashtra 444901';
+export const VENUE_MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Enrise%20by%20Sayaji%2C%20NH-6%2C%20Nagpur%20Highway%20Road%2C%20Borgaon%20%28Dharmale%29%2C%20Amravati%2C%20Maharashtra%20444901';
 export const HOST_PHONE    = '918805775117';
 export const DISPLAY_PHONE = '+91 88057 75117';
 
@@ -124,7 +124,7 @@ export const WEDDING_EVENTS: WeddingEvent[] = [
       { name: 'Zari Gold', hex: '#D4AF37' },
       { name: 'Auspicious Red', hex: '#B71C1C' },
     ],
-    venueName:   'Mahal Jorature 1, Ground Floor',
+    venueName:   'Solitaire 1, Ground Floor',
     iconName:    'varmala',
   },
   {
