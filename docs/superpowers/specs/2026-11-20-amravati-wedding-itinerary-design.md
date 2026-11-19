@@ -2,14 +2,14 @@
 
 ## Intent
 
-Turn the supplied flattened poster into a clear, shareable, single-page wedding itinerary for Sayali Dharpal and Travis Hale. The existing PDF has a readable schedule structure but rasterized text, an outdated Baraat time, and a room-name mismatch.
+Turn the supplied flattened poster into a clear, shareable, single-page wedding itinerary for Sayali Dharpal and Travis Hale. The poster's event schedule is the source of truth; the rebuilt itinerary should make its times and locations easy to read.
 
 ## Chosen approach
 
 - Rebuild the poster as a tall, single-page PDF grouped chronologically under 24, 25, and 26 November 2026.
 - Use the site's ivory, antique-gold, and burgundy palette, self-hosted fonts, and available ceremony illustrations. Use simple typographic medallions where the site has no matching event image.
 - Show the official venue name, address, and a Google Maps search link. The official hotel listing gives `NH-6, Nagpur Highway Road, Borgaon (Dharmale), Amravati, Maharashtra 444901`; its embedded map points to a different property, so the PDF will use a search link based on the official hotel name and address.
-- Use the site schedule as the event source: seven events, including Baraat at 8:00 AM and Varmala at Solitaire 1, Ground Floor.
+- Use the supplied poster as the event source of truth: seven events, including Mehendi at 12 Noon, Baraat at 8:30 AM, Varmala at Mahal Solitaire 1, and Bidaai at 4:30 PM.
 - Replace `public/downloads/wedding-itinerary.pdf` so the existing download button serves the updated itinerary. Also deliver a copy under `output/pdf/` and update the shared venue address, map link, and Varmala room label in `src/constants/weddingData.ts` so the page and PDF agree.
 - Keep the source PDF unchanged.
 

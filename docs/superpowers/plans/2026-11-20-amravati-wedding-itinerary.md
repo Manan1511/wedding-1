@@ -15,7 +15,7 @@
 - Single-page, tall portrait PDF grouped chronologically under 24, 25, and 26 November 2026.
 - Use the site's ivory, antique-gold, and burgundy palette, bundled fonts, and available ceremony illustrations; use typographic medallions where no matching image exists.
 - Official address: `NH-6, Nagpur Highway Road, Borgaon (Dharmale), Amravati, Maharashtra 444901`.
-- Use the wedding schedule's seven events and the 8:00 AM Baraat time; identify the Varmala venue as `Solitaire 1, Ground Floor`.
+- Use the source poster's seven events and timings, including Mehendi at 12 Noon and Baraat at 8:30 AM; identify Varmala as `Mahal Solitaire 1, Ground Floor` and use the event name `Bidaai`.
 - Use a Google Maps search URL based on the official hotel name and address; do not use the hotel's stale embedded map.
 - Preserve the supplied source PDF and unrelated existing `tmp/` contents.
 - Add no dependencies and make no backend changes.
@@ -23,7 +23,7 @@
 ## Review Focus
 
 - Event order and date grouping: manually inspect extracted PDF text for all seven events under the correct date.
-- Schedule accuracy: manually compare each printed time and location with `WEDDING_EVENTS`, especially the 8:00 AM Baraat and Solitaire 1.
+- Schedule accuracy: manually compare each printed time and location with the supplied source poster, especially the 8:30 AM Baraat and Mahal Solitaire 1.
 - Directions: inspect the visible official address and the PDF link annotation target.
 - Page legibility: render the one-page PDF and inspect all text, spacing, contrast, and image crops.
 - App integration: confirm the existing download link still points to `public/downloads/wedding-itinerary.pdf` and run a production build. No automated tests are added or run.
@@ -37,11 +37,11 @@
 
 **Interfaces:**
 - Consumes: the existing `VENUE_ADDRESS`, `VENUE_MAPS_URL`, and `WEDDING_EVENTS` exports.
-- Produces: corrected address and Maps search URL for `VenueSection`, plus the official `Solitaire 1` label for the Varmala event.
+- Produces: corrected address and Maps search URL for `VenueSection`, plus the source-poster `Mahal Solitaire 1` label for the Varmala event.
 
 - [x] Update `VENUE_ADDRESS` to `NH-6, Nagpur Highway Road, Borgaon (Dharmale), Amravati, Maharashtra 444901`.
 - [x] Set `VENUE_MAPS_URL` to a Google Maps search URL for Enrise by Sayaji, Amravati, using the official address as its query.
-- [x] Change the Varmala event's `venueName` to `Solitaire 1, Ground Floor`; leave its date, time, and other event values unchanged.
+- [x] Change the Varmala event's `venueName` to `Mahal Solitaire 1, Ground Floor`.
 - [x] Inspect the changed constants and confirm the display venue and schedule now use the approved values.
 
 ### Task 2: Create and integrate the itinerary PDF
@@ -57,8 +57,8 @@
 
 - [x] Build one tall portrait page with day group headings, event title, time, room, and attire for each event.
 - [x] Include Enrise by Sayaji, the verified street address, a clickable Maps search link, and the existing RSVP phone number.
-- [x] Use available ceremony illustrations; use simple typographic medallions for Baraat and Bidai, which have no matching local event image.
-- [x] Include all seven events in chronological order and preserve their displayed names and times from the schedule; use `8:00 AM` for Baraat.
+- [x] Use available ceremony illustrations; use simple typographic medallions for Baraat and Bidaai, which have no matching local event image.
+- [x] Include all seven events in chronological order and preserve their displayed names and times from the source poster; use `12 Noon` for Mehendi and `8:30 AM` for Baraat.
 - [x] Write the final PDF under `output/pdf/`, then copy identical bytes to `public/downloads/wedding-itinerary.pdf`. Do not overwrite the supplied personal PDF.
 
 ### Task 3: Verify and clean up
